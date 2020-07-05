@@ -6,6 +6,7 @@ import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import cn.magicwindow.core.ui.ItemClickSupport
+import com.blankj.utilcode.util.FileUtils
 import com.viet.news.core.delegate.viewModelDelegate
 import com.viet.news.core.ext.clickWithTrigger
 import com.viet.news.core.ext.toast

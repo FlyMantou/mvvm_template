@@ -2,12 +2,7 @@ package com.viet.task.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import com.google.gson.Gson
-import com.viet.news.core.domain.response.NewsResponse
 import com.viet.news.core.domain.response.TaskResponse
-import com.viet.news.core.ui.App
 import com.viet.news.core.utils.FileUtils
 import com.viet.news.core.viewmodel.BaseViewModel
 
@@ -32,5 +27,5 @@ class TaskViewModel: BaseViewModel() {
     fun getOtherData(): LiveData<Test> {
         return live
     }
-    data class Test(@Bindable var name:String, @Bindable val value:String): BaseObservable()
+    data class Test(var name:String,val value:String)
 }

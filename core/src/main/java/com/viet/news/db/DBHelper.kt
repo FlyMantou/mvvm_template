@@ -34,6 +34,7 @@ abstract class DBHelper : RoomDatabase() {
         }
 
 
+
         var MIGRATION_1_2: Migration = object : Migration(1, 2) {
             override fun migrate(@NonNull database: SupportSQLiteDatabase) {
                 database.execSQL("alter table user add column sex text")

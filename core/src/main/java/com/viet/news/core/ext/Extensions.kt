@@ -87,7 +87,7 @@ fun dp2px(value: Int, context: Context): Int {
 
 object MainHandler : Handler(Looper.getMainLooper())
 
-fun runOnUIThread(uiWork: () -> Unit) {
+fun uiThread(uiWork: () -> Unit) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
         uiWork()
     } else {
