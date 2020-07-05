@@ -12,12 +12,16 @@ import com.viet.mine.R
 import com.viet.mine.viewmodel.LoginViewModel
 import com.viet.news.core.config.Config
 import com.viet.news.core.delegate.viewModelDelegate
+import com.viet.news.core.domain.LoginEvent
+import com.viet.news.core.domain.User
+import com.viet.news.core.domain.response.LoginRegisterResponse
 import com.viet.news.core.dsl.addOnPageChangeListener
 import com.viet.news.core.ext.clickWithTrack
 import com.viet.news.core.ext.finishWithAnim
 import com.viet.news.core.ext.toast
 import com.viet.news.core.ui.InjectActivity
 import com.viet.news.core.ui.TabFragmentAdapter
+import com.viet.news.core.utils.RxBus
 import com.viet.news.webview.WebActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
@@ -53,7 +57,20 @@ class LoginActivity : InjectActivity() {
 
         //点击协议
         agreement_text.clickWithTrack(Config.login_userProtocol, 2000) {
-            WebActivity.launch(this, Config.PACT_URL)
+           // WebActivity.launch(this, Config.PACT_URL)
+            User.currentUser.login(LoginRegisterResponse().apply {
+                this.phoneNumber = "18710040239"
+                this.avatar = ""
+                this.token = "1"
+                this.roleId = "1"
+                this.nickName = "逍遥才子"
+                this.userId = "1"
+                this.fansCount = 1223
+                this.followCount = 455
+            })
+
+            RxBus.get().post(LoginEvent())
+            finishWithAnim()
         }
 
         login_button.setOnLoginListener(this, callbackManager) {

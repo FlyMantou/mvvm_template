@@ -17,7 +17,8 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/white">
 
         <com.viet.news.core.ui.widget.MultiStatusView
@@ -41,4 +42,9 @@
 
         </com.viet.news.core.ui.widget.MultiStatusView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="按钮"/>
 </LinearLayout>
