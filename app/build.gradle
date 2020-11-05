@@ -42,7 +42,7 @@ dependencies {
     implementation project(path: ':module_mine')
     implementation project(path: ':module_follow')
     implementation project(path: ':module_task')
-    implementation project(path: ':lib_commonUI')
+    implementation project(path: ':lib_common')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

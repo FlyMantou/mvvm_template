@@ -34,7 +34,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':lib_core')
-    implementation project(path: ':lib_commonUI')
+    implementation project(path: ':lib_common')
 
 
     implementation "com.google.dagger:dagger:$rootProject.dagger"

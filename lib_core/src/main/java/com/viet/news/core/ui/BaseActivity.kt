@@ -29,14 +29,15 @@ abstract class BaseActivity : SwipeBackActivity() {
 
 
     protected open fun setStatusBar() {
+        StatusBarUtil.setTranslucentForImageViewInFragment(this, 0, null)
         //沉浸式菜单栏的lib 国外版可以不设置状态栏 通过背景实现沉浸式菜单栏效果
-        support(Build.VERSION_CODES.M, {
-            //大于M才能修改为亮底黑字的状态栏
-            StatusBarUtil.setLightMode(this)
-            StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.page_bg), 0)
-        }, {
-            StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.page_bg), 30)
-        })
+//        support(Build.VERSION_CODES.M, {
+//            //大于M才能修改为亮底黑字的状态栏
+//            StatusBarUtil.setLightMode(this)
+//            StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.page_bg), 0)
+//        }, {
+//            StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.page_bg), 30)
+//        })
     }
 
     override fun attachBaseContext(newBase: Context) {

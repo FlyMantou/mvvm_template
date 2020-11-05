@@ -3,33 +3,41 @@ package com.viet.news.core.domain
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import com.blankj.utilcode.util.StringUtils
 import com.safframework.delegate.prefs.initKey
 import com.safframework.delegate.prefs.int
 import com.safframework.delegate.prefs.string
+import com.tencent.mmkv.MMKV
 import com.viet.news.core.ui.App
+import kotlin.reflect.KProperty
 
-class Settings(prefs: SharedPreferences = App.instance.getSharedPreferences(SP_KEY_DEFAULT, preferenceMode)) {
+class Settings(bucketId:String = "") {
 
 
 
+    lateinit var mmkv: MMKV
     init {
-        prefs.initKey("0b1r2a3v4o5o6n78") // 初始化密钥，且密钥是16位的
+        if (StringUtils.isEmpty(bucketId)){
+            mmkv = MMKV.defaultMMKV()
+        }else{
+            mmkv = MMKV.mmkvWithID(bucketId)
+        }
     }
 
-    var token by prefs.string(SP_TOKEN, isEncrypt = true)
+    var token by mmkv.string(SP_TOKEN, isEncrypt = false)
 
-    var roleId by prefs.string(SP_ROLE_ID, isEncrypt = true)
+    var roleId by mmkv.string(SP_ROLE_ID, isEncrypt = false)
 
-    var userName  by prefs.string(SP_USERNAME, isEncrypt = true)
+    var userName  by mmkv.string(SP_USERNAME, isEncrypt = false)
 
     //只在User内使用，其他地方调用
-    var telephone by prefs.string(SP_TELEPHONE, isEncrypt = true)
-    var userId by prefs.string(SP_USER_ID, isEncrypt = true)
+    var telephone by mmkv.string(SP_TELEPHONE, isEncrypt = false)
+    var userId by mmkv.string(SP_USER_ID, isEncrypt = false)
     //只在User内使用
-    var zoneCode by prefs.string(SP_ZONECODE, isEncrypt = true)
-    var avatar by prefs.string(SP_AVATAR_URL, isEncrypt = true)
-    var fansCount by prefs.int(SP_FANS_COUNT, isEncrypt = true)
-    var followCount by prefs.int(SP_FOLLOW_COUNT, isEncrypt = true)
+    var zoneCode by mmkv.string(SP_ZONECODE, isEncrypt = false)
+    var avatar by mmkv.string(SP_AVATAR_URL, isEncrypt = false)
+    var fansCount by mmkv.int(SP_FANS_COUNT, isEncrypt = false)
+    var followCount by mmkv.int(SP_FOLLOW_COUNT, isEncrypt = false)
 //    var countryAbbreviation by prefs.string(SP_COUNTRY_ABBREVIATION, isEncrypt = true)
 
 

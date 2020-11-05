@@ -2,6 +2,7 @@ package com.viet.news.di
 
 import android.app.Activity
 import com.squareup.leakcanary.LeakCanary
+import com.tencent.mmkv.MMKV
 import com.viet.news.core.ui.App
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -26,6 +27,11 @@ class NewsApp : App(), HasActivityInjector {
         LeakCanary.install(this)
 
         AppInjector.init(this)
+
+        //初始化MMKV
+        MMKV.initialize(this)
+
+
         //方法已过期 看注释说是会自动调用，暂时不删
 //        FacebookSdk.sdkInitialize(applicationContext);
 //        AppEventsLogger.activateApp(this);
