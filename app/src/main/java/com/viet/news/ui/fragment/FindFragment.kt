@@ -1,11 +1,11 @@
 package com.viet.news.ui.fragment
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Observer
 import cn.magicwindow.channelwidget.AddChannelFragment
 import cn.magicwindow.channelwidget.entity.ChannelBean
 import com.jaeger.library.StatusBarUtil
@@ -71,7 +71,7 @@ class FindFragment : InjectFragment(), AddChannelFragment.DataChangeListener {
         id_add_channel_entry_iv.clickWithTrigger {
             mAddChannelFragment = AddChannelFragment(model.followList, model.unFollowList)
             mAddChannelFragment?.setOnDataChangeListener(this)
-            mAddChannelFragment?.show(fragmentManager, "addChannel")
+            mAddChannelFragment?.show(fragmentManager!!, "addChannel")
         }
     }
 
@@ -91,7 +91,7 @@ class FindFragment : InjectFragment(), AddChannelFragment.DataChangeListener {
     }
 }
 
-class MyViewPager @Inject constructor(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
+class MyViewPager @Inject constructor(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private val baseFragmentMap = hashMapOf<Int, BaseFragment>()
 
@@ -104,7 +104,7 @@ class MyViewPager @Inject constructor(fm: FragmentManager?) : FragmentStatePager
 
     override fun getCount(): Int = mDataList.size
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         var fragment: BaseFragment? = baseFragmentMap[position]
         if (fragment == null) {
             fragment = NewsFragment.newInstance(mDataList[position].id)

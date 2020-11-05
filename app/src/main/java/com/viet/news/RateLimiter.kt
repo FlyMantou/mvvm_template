@@ -1,7 +1,7 @@
 package com.viet.news
 
 import android.os.SystemClock
-import android.support.v4.util.ArrayMap
+import android.util.ArrayMap
 import java.util.concurrent.TimeUnit
 
 

@@ -13,15 +13,16 @@ kapt {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
     defaultConfig {
         applicationId "com.viet.news"
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
@@ -37,19 +38,19 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':core')
-    implementation project(path: ':mine')
-    implementation project(path: ':follow')
-    implementation project(path: ':task')
-    implementation project(path: ':commonUI')
+    implementation project(path: ':lib_core')
+    implementation project(path: ':module_mine')
+    implementation project(path: ':module_follow')
+    implementation project(path: ':module_task')
+    implementation project(path: ':lib_commonUI')
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation "com.android.support.test:runner:$rootProject.test_runner"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espresso_core"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
     kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
     kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glide"
-    kapt "android.arch.persistence.room:compiler:$rootProject.room"
-    kapt "android.arch.lifecycle:compiler:$rootProject.lifecycle"
+    kapt 'androidx.room:room-compiler:2.0.0'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
 }

@@ -59,7 +59,7 @@ class MainActivity : InjectActivity() {
     * 当配置信息改变而不需要重建activity时调用，配置信息在manifest文件中
     * 例如切换系统语言，针对我们的App，主页也没用keyboard事件，基本上就是切换系统语言才会调用此方法
     */
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         LanguageUtil.onConfigurationChanged(this)
         reLoadView()

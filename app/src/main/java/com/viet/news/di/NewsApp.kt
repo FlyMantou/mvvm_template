@@ -1,11 +1,8 @@
 package com.viet.news.di
 
 import android.app.Activity
-import android.content.Context
-import android.support.multidex.MultiDex
 import com.squareup.leakcanary.LeakCanary
 import com.viet.news.core.ui.App
-import com.viet.news.core.utils.LanguageUtil
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

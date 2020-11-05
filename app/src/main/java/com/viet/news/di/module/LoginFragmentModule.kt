@@ -1,6 +1,6 @@
 package com.viet.news.di.module
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.viet.mine.fragment.LoginFragment
 import com.viet.news.core.di.FragmentScope
 import dagger.Module
@@ -18,5 +18,5 @@ class LoginFragmentModule {
 
     @FragmentScope
     @Provides
-    internal fun providesLoginFragment(fragment: LoginFragment): FragmentManager? = fragment.childFragmentManager
+    internal fun providesLoginFragment(fragment: LoginFragment): FragmentManager = fragment.childFragmentManager
 }

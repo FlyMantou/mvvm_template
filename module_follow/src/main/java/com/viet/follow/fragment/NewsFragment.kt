@@ -1,0 +1,170 @@
+package com.viet.follow.fragment
+
+import android.content.Context
+import android.os.Bundle
+import android.view.View
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import com.scwang.smartrefresh.layout.api.RefreshHeader
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.scwang.smartrefresh.layout.internal.InternalClassics
+import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener
+import com.viet.follow.R
+import com.viet.follow.adapter.NewsAdapter
+import com.viet.follow.viewmodel.FindViewModel
+import com.viet.news.core.config.Config
+import com.viet.news.core.delegate.viewModelDelegate
+import com.viet.news.core.domain.RefreshNewsEvent
+import com.viet.news.core.domain.response.NewsListBean
+import com.viet.news.core.ext.isBlank
+import com.viet.news.core.ui.RealVisibleHintBaseFragment
+import com.viet.news.core.utils.RxBus
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.HasSupportFragmentInjector
+import kotlinx.android.synthetic.main.fragment_news.*
+import javax.inject.Inject
+
+/**
+ * @Description 频道详情页面
+ * @Author sean
+ * @Email xiao.lu@magicwindow.cn
+ * @Date 03/09/2018 3:34 PM
+ * @Version 1.0.0
+ */
+class NewsFragment : RealVisibleHintBaseFragment(), HasSupportFragmentInjector {
+    @Inject
+    internal lateinit var adapter: NewsAdapter
+    private val model: FindViewModel by viewModelDelegate(FindViewModel::class)
+    var id: String? = ""
+    var page_number = 0
+
+    override fun isSupportSwipeBack(): Boolean {
+        return false
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_news
+    }
+
+    override fun onFragmentFirstVisible() {
+        id = arguments?.getString(Config.BUNDLE_ID)
+        refreshLayout.autoRefresh()
+        initEvent()
+    }
+
+    override fun initView(view: View) {
+        adapter.model = model
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        val dividerItemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.shape_list_divider_gray_05dp)!!)
+        recyclerView.addItemDecoration(dividerItemDecoration)
+        initListener()
+    }
+
+    private fun initEvent() {
+        compositeDisposable.add(RxBus.get().register(RefreshNewsEvent::class.java) {
+            if (isFragmentVisible(this)) {
+                recyclerView.scrollToPosition(0)
+                refreshLayout.autoRefresh()
+            }
+        })
+    }
+
+    private fun initListener() {
+        refreshLayout.setOnMultiPurposeListener(listener)
+        refreshLayout.setOnRefreshListener { initData(false) }
+        refreshLayout.setOnLoadMoreListener { initData(true) }
+        multiStatusView.setLoadingButtonClickListener(View.OnClickListener { refreshLayout.autoRefresh() })
+    }
+
+    private fun initData(loadMore: Boolean) {
+        if (loadMore) {
+            page_number += 1
+        } else {
+            page_number = 1
+        }
+        model.getlist4Channel(id, page_number)
+                .observe(this, Observer {
+                    it?.work(onSuccess = {
+                        model.newsList = it.data?.list as ArrayList<NewsListBean>
+                        multiStatusView.showContent()
+                        if (loadMore) {
+                            if (isBlank(it.data?.list)) {
+                                refreshLayout.finishLoadMoreWithNoMoreData()
+                            } else {
+                                refreshLayout.finishLoadMore()
+                                adapter.addData(it.data?.list)
+                            }
+                        } else {
+                            if (isBlank(it.data?.list)) {
+                                multiStatusView.showEmpty()
+                                refreshLayout.setEnableLoadMore(false)
+                            }
+                            recyclerView.scrollToPosition(0)
+                            adapter.addData(0, it.data?.list as ArrayList<NewsListBean>)
+                            refreshLayout.setNoMoreData(false)
+                            refreshLayout.finishRefresh()
+                        }
+                    }, onError = {
+                        multiStatusView.showError()
+                        model.newsList.clear()
+                        if (loadMore) {
+                            refreshLayout.finishLoadMore(false)//传入false表示加载失败
+                        } else {
+                            refreshLayout.finishRefresh(false)
+                        }
+                    })
+                })
+    }
+
+    private val listener = object : SimpleMultiPurposeListener() {
+
+        override fun onHeaderFinish(header: RefreshHeader?, success: Boolean) {
+            header as ClassicsHeader
+            if (model.newsList.isEmpty()) {
+                header.findViewById<TextView>(InternalClassics.ID_TEXT_TITLE.toInt()).text = getString(R.string.no_updates_are_available)
+            } else {
+                header.findViewById<TextView>(InternalClassics.ID_TEXT_TITLE.toInt()).text = String.format(getString(R.string.updates_s_article), model.newsList.size)
+            }
+            header.setPrimaryColor(resources.getColor(R.color.red_hint))
+            header.setAccentColor(resources.getColor(R.color.white))
+        }
+
+        override fun onHeaderMoving(header: RefreshHeader?, isDragging: Boolean, percent: Float, offset: Int, headerHeight: Int, maxDragHeight: Int) {
+            header as ClassicsHeader
+            header.setPrimaryColor(resources.getColor(R.color.white))
+            header.setAccentColor(resources.getColor(R.color.text_gray))
+        }
+    }
+
+    companion object {
+        fun newInstance(id: String?): NewsFragment {
+            val fragment = NewsFragment()
+            val bundle = Bundle()
+            bundle.putString(Config.BUNDLE_ID, id)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+    @Inject
+    internal lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment>? {
+        return childFragmentInjector
+    }
+
+    override fun onAttach(context: Context) {
+        //使用的Fragment 是V4 包中的，不然就是AndroidInjection.inject(this)
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
+}

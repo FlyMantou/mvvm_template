@@ -41,7 +41,7 @@
 
     <View style="@style/line.gray_tran"/>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/id_view_Pager"
         android:overScrollMode="never"
         android:layout_width="match_parent"

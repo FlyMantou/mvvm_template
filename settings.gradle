@@ -1,1 +1,2 @@
-include ':app',":codec", ':core', ':mine', ':task', ':follow',":commonUI"
+include ':lib_brvah3'
+include ':app', ':lib_codec', ':lib_core', ':module_mine', ':module_task', ':module_follow', ':lib_commonUI'

@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.build_versions.target_sdk
+    buildToolsVersion rootProject.ext.build_versions.build_tools
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.build_versions.min_sdk
+        targetSdkVersion rootProject.ext.build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "com.github.CymChad.brvah"]
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation deps.kotlin.stdlib
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+//    compileOnly 'androidx.annotation:annotation:1.0.0'
+}

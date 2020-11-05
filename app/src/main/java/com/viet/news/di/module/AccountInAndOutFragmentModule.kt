@@ -1,6 +1,6 @@
 package com.viet.news.di.module
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.viet.mine.fragment.AccountInAndOutFragment
 import com.viet.news.core.di.FragmentScope
 import dagger.Module
@@ -17,5 +17,5 @@ import dagger.Provides
 class AccountInAndOutFragmentModule {
     @FragmentScope
     @Provides
-    internal fun providesAccountInAndOutFragment(fragment: AccountInAndOutFragment): FragmentManager? = fragment.childFragmentManager
+    internal fun providesAccountInAndOutFragment(fragment: AccountInAndOutFragment): FragmentManager = fragment.childFragmentManager
 }

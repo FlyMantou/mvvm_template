@@ -11,15 +11,17 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/codec" />
-            <option value="$PROJECT_DIR$/commonUI" />
-            <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/follow" />
-            <option value="$PROJECT_DIR$/mine" />
-            <option value="$PROJECT_DIR$/task" />
+            <option value="$PROJECT_DIR$/lib_brvah3" />
+            <option value="$PROJECT_DIR$/lib_codec" />
+            <option value="$PROJECT_DIR$/lib_commonUI" />
+            <option value="$PROJECT_DIR$/lib_core" />
+            <option value="$PROJECT_DIR$/module_follow" />
+            <option value="$PROJECT_DIR$/module_mine" />
+            <option value="$PROJECT_DIR$/module_task" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

@@ -1,6 +1,6 @@
 package com.viet.news.di.module
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.viet.news.core.di.FragmentScope
 import com.viet.news.ui.fragment.FindFragment
 import dagger.Module
@@ -20,7 +20,7 @@ class FindModule {
 
     @FragmentScope
     @Provides
-    internal fun providesFragmentManager(fragment: FindFragment): FragmentManager? = fragment.fragmentManager
+    internal fun providesFragmentManager(fragment: FindFragment): FragmentManager = fragment.fragmentManager!!
 
 //    @FragmentScope
 //    @Provides

@@ -1,6 +1,6 @@
 package com.viet.news.di.module
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.viet.news.core.di.ActivityScope
 import com.viet.news.ui.activity.MainActivity
 import dagger.Module
@@ -18,5 +18,5 @@ class MainModule {
 
     @ActivityScope
     @Provides
-    internal fun providesMainActivity(activity: MainActivity): FragmentManager? = activity.supportFragmentManager
+    internal fun providesMainActivity(activity: MainActivity): FragmentManager = activity.supportFragmentManager
 }

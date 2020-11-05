@@ -1,6 +1,6 @@
 package com.viet.news.di.module
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.viet.follow.activity.FansAndFollowActivity
 import com.viet.news.core.di.ActivityScope
 import dagger.Module
@@ -18,5 +18,5 @@ class FunsAndFollowModule {
 
     @ActivityScope
     @Provides
-    internal fun providesLoginActivity(activity: FansAndFollowActivity): FragmentManager? = activity.supportFragmentManager
+    internal fun providesLoginActivity(activity: FansAndFollowActivity): FragmentManager = activity.supportFragmentManager
 }

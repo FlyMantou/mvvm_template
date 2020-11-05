@@ -1,6 +1,6 @@
 package com.viet.news.di.module
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.viet.mine.activity.MineWalletActivity
 import com.viet.news.core.di.ActivityScope
 import dagger.Module
@@ -17,5 +17,5 @@ import dagger.Provides
 class MineWalletModule {
     @ActivityScope
     @Provides
-    internal fun providesMineWalletActivity(activity: MineWalletActivity): FragmentManager? = activity.supportFragmentManager
+    internal fun providesMineWalletActivity(activity: MineWalletActivity): FragmentManager = activity.supportFragmentManager
 }

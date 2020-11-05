@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.viet.news.core.ui.widget.TitleBar
+        android:id="@+id/title_bar"
+        style="@style/title_bar.red"
+        android:layout_height="70dp"
+        android:paddingTop="@dimen/statusbar_view_height"
+        app:titlebar_leftDrawable="@null"
+        app:titlebar_titleText="@string/title_task" />
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white">
+
+        <com.viet.news.core.ui.widget.MultiStatusView
+            android:id="@+id/multi_status_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:emptyView="@layout/view_empty"
+            app:errorView="@layout/view_error">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_task"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:overScrollMode="never"
+                android:paddingStart="@dimen/page_padding_left"
+                android:paddingLeft="@dimen/page_padding_left"
+                android:paddingEnd="@dimen/page_padding_right"
+                android:paddingRight="@dimen/page_padding_right" />
+
+
+        </com.viet.news.core.ui.widget.MultiStatusView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="按钮"/>
+</LinearLayout>
