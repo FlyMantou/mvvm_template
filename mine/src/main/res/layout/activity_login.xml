@@ -79,6 +79,21 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="插入数据"/>
+    <Button
+        android:id="@+id/test2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取数据"/>
+    <Button
+        android:id="@+id/test3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查询数量"/>
 </LinearLayout>
 
 

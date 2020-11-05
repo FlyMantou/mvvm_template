@@ -88,6 +88,8 @@ class LoginActivity : InjectActivity() {
                 it?.message.let { toast(it)  }
             }
         }
+
+
     }
 
     private fun initListener() {
@@ -95,6 +97,18 @@ class LoginActivity : InjectActivity() {
         model.statusMsg.observe(this, Observer { it?.let { msg -> toast(msg)  } })
         viewpager.addOnPageChangeListener { onPageSelected = { setTabText(it, model.currentTab) } }
         iv_close.click { finishWithAnim(0, R.anim.activity_close) }
+
+        test.click {
+            model.test()
+        }
+
+        test2.click {
+            model.test2()
+        }
+        test3.click {
+            model.test3()
+        }
+
     }
 
     private fun setTabText(currentTab: Int, otherTab: Int) {

@@ -96,6 +96,16 @@ class LoginViewModel(private var repository: LoginRepository = LoginRepository()
 
     }
 
+    fun test(){
+        repository.test()
+    }
+    fun test2(){
+        repository.test2()
+    }
+    fun test3(){
+        repository.test3()
+    }
+
     /**
      * 开始注册验证码倒计时
      */

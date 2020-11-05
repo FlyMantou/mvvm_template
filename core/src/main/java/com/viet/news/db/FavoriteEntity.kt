@@ -1,6 +1,7 @@
 package com.viet.news.db
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Index
 import android.arch.persistence.room.PrimaryKey
 import com.viet.news.core.config.Config
 
@@ -10,9 +11,9 @@ import com.viet.news.core.config.Config
  * @Date 2018/9/12
  * @Description
  */
-@Entity(tableName = Config.FAVORITE_TABLE_NAME)
+@Entity(indices = [Index(value = ["name"])],tableName = Config.FAVORITE_TABLE_NAME)
 class FavoriteEntity(
-        @PrimaryKey()
+        @PrimaryKey
         var id: String = "",
         var name: String? = "",
         var description: String? = "",

@@ -90,7 +90,7 @@ object Config {
     const val ROUTER_MINE_EDIT_SETUP_PWD_FRAGMENT = "/mine/edit/setup/pwd/fragment"
     const val ROUTER_MINE_EDIT_VERIFY_CODE_FRAGMENT = "/mine/edit/verify_code/fragment"
 
-    const val DB_NAME = "yxy"
+    const val DB_NAME = "yxy.db"
     const val FAVORITE_TABLE_NAME = "favorite_table"
     const val QUESTION_TABLE_NAME = "QUESTION_BEAN"
     const val NULL_TABLE_NAME = "null_table"
